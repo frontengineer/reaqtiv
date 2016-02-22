@@ -1,0 +1,363 @@
+@import '../../bower_components/bootstrap/less/bootstrap';
+@import '../../node_modules/react-sortable-items/style.css';
+
+.Sortable {
+   .SortableItem {
+    &.rfb-item {
+      position: relative;
+      &:hover {
+        background: #fff;
+        box-shadow: 0 0 5px #ddd inset;
+        .toolbar-header {
+          opacity: 1;
+        }
+      }
+      .toolbar-header {
+        opacity: 0;
+        position: relative;
+        z-index: 100;
+
+        .toolbar-header-buttons {
+          position: absolute;
+          right: 20px;
+        }
+      }
+    }
+  }
+  .rfb-item {
+      padding: 10px 20px;
+  }
+
+  .form-group{
+    &>label {
+      max-width: 90%;
+    }
+    .checkbox-label {
+      font-weight: normal;
+      display: block;
+    }
+    .radio-label {
+      font-weight: normal;
+      display: block;
+    }
+  }
+
+}
+
+.dashed {
+  border-style: dashed;
+}
+.vpad5 {
+  padding: 5px 0;
+}
+.text-left {
+  text-align: left;
+}
+#custom-form-draft {
+  position: relative;
+  width: 70%;
+  border: 1px solid #ddd;
+  background: #fafafa;
+  padding: 10px;
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.1);
+  min-height: 750px;
+  -webkit-border-top-left-radius: 5px;
+  -webkit-border-top-right-radius: 5px;
+  -moz-border-radius-topleft: 5px;
+  -moz-border-radius-topright: 5px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+#custom-form-toolbar {
+  width: 250px;
+  background: #fff;
+
+  .form-field-buttons {
+    button {
+      &.dashed {
+        i.fa {
+          margin: 0 15px 0 10px;
+        }
+      }
+    }
+  }
+}
+#edit-form {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  bottom: 0;
+  left: -9999em;
+  padding: 0 20px 20px 20px;
+  background: #f3f3f3;
+  z-index: 110;
+
+
+  &.editModeOn {
+    opacity: 1;
+    left: 0;
+    right: 0;
+  }
+
+  ul {
+    list-style-type: none;
+  }
+}
+.edit-done-bar {
+  text-align: right;
+  background: #e4e4e4;
+  margin: 0 -20px 20px;
+
+  .edit-done-bar-button {
+    padding-right: 20px;
+  }
+}
+
+
+
+
+
+
+
+.m-signature-pad {
+  font-size: 10px;
+  width: auto;
+}
+
+.m-signature-pad:before, .m-signature-pad:after {
+  position: absolute;
+  z-index: -1;
+  content: "";
+  width: 40%;
+  height: 10px;
+  left: 20px;
+  bottom: 10px;
+  background: transparent;
+  -webkit-transform: skew(-3deg) rotate(-3deg);
+  -moz-transform: skew(-3deg) rotate(-3deg);
+  -ms-transform: skew(-3deg) rotate(-3deg);
+  -o-transform: skew(-3deg) rotate(-3deg);
+  transform: skew(-3deg) rotate(-3deg);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.4);
+}
+
+.m-signature-pad:after {
+  left: auto;
+  right: 20px;
+  -webkit-transform: skew(3deg) rotate(3deg);
+  -moz-transform: skew(3deg) rotate(3deg);
+  -ms-transform: skew(3deg) rotate(3deg);
+  -o-transform: skew(3deg) rotate(3deg);
+  transform: skew(3deg) rotate(3deg);
+}
+
+.m-signature-pad--body {
+  position: relative;
+  width: auto;
+  height: 200px;
+  border: 1px solid #f4f4f4;
+  background: #fff;
+}
+
+.m-signature-pad--body
+  canvas {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.02) inset;
+  }
+
+.m-signature-pad--footer {
+  position: relative;;
+  margin-top:10px;
+}
+
+.m-signature-pad--footer
+  .description {
+    color: #C3C3C3;
+    text-align: center;
+    font-size: 1.2em;
+    margin-top: 1.8em;
+  }
+
+.m-signature-pad--footer
+  .button {
+  }
+
+.m-signature-pad--footer
+  .button.clear {
+    left: 0;
+  }
+
+.m-signature-pad--footer
+  .button.save {
+    right: 0;
+  }
+
+@media screen and (max-width: 1024px) {
+  .m-signature-pad {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: auto;
+    height: auto;
+    min-width: 250px;
+    min-height: 140px;
+    margin: 5%;
+  }
+  #github {
+    display: none;
+  }
+}
+
+@media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  .m-signature-pad {
+    margin: 10%;
+  }
+}
+
+@media screen and (max-height: 320px) {
+  .m-signature-pad--body {
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 32px;
+  }
+  .m-signature-pad--footer {
+    left: 20px;
+    right: 20px;
+    bottom: 4px;
+    height: 28px;
+  }
+  .m-signature-pad--footer
+    .description {
+      font-size: 1em;
+      margin-top: 1em;
+    }
+}
+
+.Select {
+    position: relative;
+
+}
+
+.Select.is-multi .Select-control {
+    padding: 2px 52px 2px 3px;
+}
+.Select-control {
+    position: relative;
+    overflow: hidden;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-color: #d9d9d9 #cccccc #b3b3b3;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: #333333;
+    cursor: default;
+    outline: none;
+    padding: 8px 52px 8px 10px;
+    transition: all 200ms ease;
+}
+
+.Select-item {
+    background-color: #f2f9fc;
+    border-radius: 2px;
+    border: 1px solid #c9e6f2;
+    color: #0088cc;
+    display: inline-block;
+    font-size: 1em;
+    margin: 2px;
+}
+
+.Select-item-icon {
+    cursor: pointer;
+    border-bottom-left-radius: 2px;
+    border-top-left-radius: 2px;
+    border-right: 1px solid #c9e6f2;
+    padding: 2px 5px 4px;
+}
+
+.Select-item-icon, .Select-item-label {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.Select-item-label {
+    cursor: default;
+    border-bottom-right-radius: 2px;
+    border-top-right-radius: 2px;
+    padding: 3px 5px;
+}
+
+.Select-item-icon, .Select-item-label {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.Select.is-multi .Select-input {
+    vertical-align: middle;
+    border: 1px solid transparent;
+    margin: 2px;
+    padding: 3px 0;
+}
+
+.Select-control:not(.is-searchable) > .Select-input {
+    outline: none;
+}
+
+.Select-input > input {
+    cursor: default;
+    background: none transparent;
+    box-shadow: none;
+    height: auto;
+    border: 0 none;
+    font-family: inherit;
+    font-size: inherit;
+    margin: 0;
+    padding: 0;
+    outline: none;
+    display: inline-block;
+    -webkit-appearance: none;
+}
+
+.Select-arrow-zone {
+    content: " ";
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 30px;
+    cursor: pointer;
+}
+
+.Select-arrow {
+    border-color: #999999 transparent transparent;
+    border-style: solid;
+    border-width: 5px 5px 0;
+    content: " ";
+    display: block;
+    height: 0;
+    margin-top: -ceil(2.5px);
+    position: absolute;
+    right: 10px;
+    top: 14px;
+    width: 0;
+    cursor: pointer;
+}
+
+.Select-clear {
+    color: #999999;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 16px;
+    padding: 6px 10px;
+    position: absolute;
+    right: 17px;
+    top: 0;
+}
