@@ -1,4 +1,5 @@
 import React from 'react';
+import Rx from 'rx-lite';
 import DynamicOptionList from './dynamic-option-list';
 import TextAreaAutosize from 'react-textarea-autosize';
 import assign from '../utils/assign';

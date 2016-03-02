@@ -1,5 +1,7 @@
 import React from 'react';
-import Router, {Route, Link, RouteHandler} from 'react-router';
+import ReactDOM from 'react-dom';
+import { Router, Route, browserHistory, match, RouterContext } from 'react-router';
+
 import routes from './routes/routes';
 
 import Model from './store/MainModel';
@@ -7,7 +9,9 @@ import Model from './store/MainModel';
 require('./css/styles.less');
 
 Model.subscribe(appState => {
-  Router.run(routes, Router.HistoryLocation, (Handler, state) => {
-    React.render(<Handler state={state} appState={appState} />, document.getElementById('app'));
+  let history = browserHistory;
+  match({ history, routes }, (error, redirectLocation, renderProps) => {
+    console.log('the history', history, routes);
   });
+    ReactDOM.render(<Router history={browserHistory} routes={routes} />, document.getElementById('app'));
 });

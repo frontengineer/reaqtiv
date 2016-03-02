@@ -1,4 +1,4 @@
-import React, {Component} from 'react/addons';
+import React, {Component} from 'react';
 import Rx from 'rx-lite';
 import assign from 'object-assign';
 import _ from 'lodash';

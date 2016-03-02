@@ -32,7 +32,7 @@ const TodoList = React.createClass({
 
   },
 
-  componentDidUnmount : function () {
+  componentWillUnmount : function () {
     this.stream.dispose();
   },
 

@@ -19,21 +19,8 @@ export default class DynamicOptionList extends React.Component {
     this.setState({ element: JSON.parse(JSON.stringify(this.props.element)) })
   }
   componentWillReceiveProps(nextProps){
-    console.log('dyn props', nextProps,);
-    console.log('props current', this.props);
-    console.log('isMatch?? ', (nextProps.element === this.props.element));
-    // if (nextProps.element !== this.props.element){
-      console.log('re-setting state');
-      this.setState({element: nextProps.element});
-      // this.forceUpdate();
-    // }
+    this.setState({element: nextProps.element});
   }
-  // shouldComponentUpdate(nextProps, nextState) {
-    // console.log('the curr props ', this.props.element, ' next prop set', nextProps.element);
-    // console.log('the curr state ', this.state, ' next state set', nextState.element);
-    // console.log('matching state', (nextProps.element === this.state.element));
-  //   return (nextProps.element !== this.props.element);
-  // }
 
   _setValue(text) {
     return text.replace(/[^A-Z0-9]+/ig, "_").toLowerCase();

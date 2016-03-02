@@ -1,4 +1,4 @@
-import React from 'react/addons';
+import React from 'react';
 import HeaderBar from './header-bar';
 import StarRating from 'react-star-rating';
 import Select from 'react-select';

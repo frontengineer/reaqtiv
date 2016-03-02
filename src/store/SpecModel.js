@@ -2,12 +2,14 @@ import React from 'react';
 import Rx from 'rx-lite';
 import ElementData, {elementList, _defaultItemOptions} from '../form_builder/FormFieldData';
 import _ from 'lodash';
+import axios from 'axios';
 import ID from '../form_builder/UUID';
 import assign from '../utils/assign';
 import Keys from '../form_builder/FormBuilderIntents';
 
 import {SpecIntent} from '../intents/SpecIntent';
 
+require('es6-promise').polyfill();
 const SpecOutputModel = new Rx.BehaviorSubject([]);
 export default SpecOutputModel;
 // export function getRawData(){ return ElementData.getElements(); };
@@ -25,9 +27,9 @@ function finder(valueFn, bestFn, coll){
 /**
 TODO
 - Disable left menu top nav during edit mode
-- Design UI toggles for Add, Edit, Conditions, Ratings
+- Design UI toggles for Add, Edit, Conditions, Rankings
 - Develop Conditions
-- Develop Ratings
+- Develop Rating
 - Consider creating "Downloadables" button
     to allow Multiple Downloadables on a same line vs. separate row
 --- fix options add/remove
@@ -77,19 +79,20 @@ const createElement = toElementMap(elementList)('key');
 let initialSpecFields = [];
 const SpecFieldSubject = new Rx.BehaviorSubject(initialSpecFields);
 
-var source = Rx.Observable.fromPromise($.ajax({
-  url : '/mock_form_data.json',
-  success: function(data) {
-    console.log('json', data);
-  },
-  error: function(a, b, c) {
-    console.log('failed', a, b, c);
-  }
-})).subscribe(x => {
-  SpecFieldSubject.onNext(function(){
-    return x;
-  })
-});
+
+  var source = Rx.Observable.fromPromise(axios.get('/mock_form_data.json')
+    .then(function (response) {
+      console.log('axios then',response);
+      return response.data;
+    })
+    .catch(function (response) {
+      console.log('axios catch',response);
+    })).subscribe(x => {
+    SpecFieldSubject.onNext(function(){
+      return x;
+    })
+  });
+
 
 
 /*

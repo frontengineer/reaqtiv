@@ -32,6 +32,15 @@ module.exports = {
         loader: 'style!css' // Run both loaders
       },
       {
+        test: /\.jpg$/,
+        loader: 'url?limit=25000'
+      },
+      {test: /\.png$/,  loader: "url?limit=10000&mimetype=image/png" },
+      {test: /\.(woff|woff2)$/, loader: "url?limit=10000&mimetype=application/font-woff" },
+      {test: /\.ttf$/,  loader: "url?limit=10000&mimetype=application/octet-stream" },
+      {test: /\.eot$/,  loader: "file" },
+      {test: /\.svg$/,  loader: "url?limit=10000&mimetype=image/svg+xml" },
+      {
         test: /\.js?$/,
         loaders: ['jsx-loader?harmony', 'babel?optional[]=runtime&stage=1'],
         exclude: /node_modules/
