@@ -13,7 +13,7 @@ const SpecIntent = new Rx.BehaviorSubject([]);
 Rx.Observable.merge(FLI, SpecFormIntent).subscribe(SpecIntent);
 
 Create_Field.subscribe(data => {
-  console.log('SpecIntent: field component intent', data)
+  // console.log('SpecIntent: field component intent', data)
   // if((data && data.intent) && data.intent === Keys.DESTROY_ELEMENT){
   //   console.log('destroyer', data);
     SpecIntent.onNext(data);

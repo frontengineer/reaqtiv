@@ -1,5 +1,5 @@
 import React from 'react';
-
+import ProtectedComponent from '../service/ProtectedComponent';
 const Home = {
 
   render: () => {
@@ -11,4 +11,4 @@ const Home = {
   }
 }
 
-module.exports = React.createClass(Home);
+module.exports = ProtectedComponent(React.createClass(Home));

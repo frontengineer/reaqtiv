@@ -175,7 +175,7 @@ function filterOnKeyByVal(coll, key, val){
 }
 const filterBy = filterOnKeyByVal(elementWithOptions(elementList, _defaultItemOptions));
 
-console.log('FormFieldData:filterBy: ','key');
+// console.log('FormFieldData:filterBy: ','key');
 export default {
   filterBy :  filterBy,
   getElements : () => elementList

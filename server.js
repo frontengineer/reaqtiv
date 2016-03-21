@@ -85,8 +85,8 @@ var redirect = express();
 
 // var vapp = module.exports = express();
 
-app.use(vhost('*.reaqtiv.com', redirect)); // Serves all subdomains via Redirect app
-app.use(vhost('reaqtiv.com', app)); // Serves top level domain via Main server app
+// app.use(vhost('*.reaqtiv.com', redirect)); // Serves all subdomains via Redirect app
+// app.use(vhost('reaqtiv.com', app)); // Serves top level domain via Main server app
 
 
 // It is important to catch any errors from the proxy or the

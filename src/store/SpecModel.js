@@ -80,18 +80,18 @@ let initialSpecFields = [];
 const SpecFieldSubject = new Rx.BehaviorSubject(initialSpecFields);
 
 
-  var source = Rx.Observable.fromPromise(axios.get('/mock_form_data.json')
-    .then(function (response) {
-      console.log('axios then',response);
-      return response.data;
-    })
-    .catch(function (response) {
-      console.log('axios catch',response);
-    })).subscribe(x => {
-    SpecFieldSubject.onNext(function(){
-      return x;
-    })
-  });
+  // var source = Rx.Observable.fromPromise(axios.get('/mock_form_data.json')
+  //   .then(function (response) {
+  //     // console.log('axios then',response);
+  //     return response.data;
+  //   })
+  //   .catch(function (response) {
+  //     console.log('axios catch',response);
+  //   })).subscribe(x => {
+  //   SpecFieldSubject.onNext(function(){
+  //     return x;
+  //   })
+  // });
 
 
 
@@ -126,7 +126,7 @@ SpecIntent.subscribe(action => {
       });
       break;
     case Keys.UPDATE_ELEMENT:
-    console.log('SpecModel: model updating action payload', action.payload);
+    // console.log('SpecModel: model updating action payload', action.payload);
       SpecFieldSubject.onNext(function (fields) {
           return fields.map( x => {
             return (x.refId !== action.payload.refId) ? x : assign({}, action.payload) ;
