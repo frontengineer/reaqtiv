@@ -1,7 +1,7 @@
 var webpack = require('webpack');
 var path = require('path');
 
-var devDomain =  '192.168.1.116' ; //'localhost'; //;
+var devDomain =  'localhost';
 
 module.exports = {
   devtool: 'eval',
@@ -42,15 +42,14 @@ module.exports = {
       {test: /\.svg$/,  loader: "url?limit=10000&mimetype=image/svg+xml" },
       {
         test: /\.js?$/,
-        loaders: ['react-hot', 'babel?optional[]=runtime&stage=1'],
+        loaders: ['react-hot', 'babel-loader'],
         exclude: /node_modules|bower_components/
       },
       {
         test: /\.jsx?$/,
-        loaders: ['react-hot', 'babel?optional[]=runtime&stage=1'],
+        loaders: ['react-hot', 'babel-loader'],
         exclude: /node_modules|bower_components/
-      },
-      { test: /\.handlebars$/, loader: "handlebars-loader" }
+      }
     ]
   }
 };

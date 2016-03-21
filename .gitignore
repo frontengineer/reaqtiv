@@ -18,5 +18,5 @@ dist
 ._*
 ehthumbs.db
 Thumbs.db
-src/server/config/local.env.js
+src/config/config.js
 lib
