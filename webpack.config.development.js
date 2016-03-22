@@ -1,5 +1,9 @@
 var webpack = require('webpack');
 var path = require('path');
+var nodeModulesPath = path.resolve(__dirname, 'node_modules');
+var bowerComponentsPath = path.resolve(__dirname, 'bower_components');
+var buildPath = path.resolve(__dirname, 'public', 'build');
+var mainPath = path.resolve(__dirname, 'src', 'index.js');
 
 var devDomain =  'localhost';
 
@@ -8,12 +12,12 @@ module.exports = {
   entry: [
     'webpack-dev-server/client?http://' + devDomain + ':8000',
     'webpack/hot/only-dev-server',
-    './src/index'
+    mainPath
   ],
   output : {
-    path      : __dirname + '/bundle/',
+    path      : buildPath,
     filename  : 'bundle.js',
-    publicPath: 'http://' + devDomain + ':8000/bundle/'
+    publicPath: '/build/'
   },
   plugins : [
     new webpack.HotModuleReplacementPlugin(),
@@ -43,12 +47,12 @@ module.exports = {
       {
         test: /\.js?$/,
         loaders: ['react-hot', 'babel-loader'],
-        exclude: /node_modules|bower_components/
+        exclude: [nodeModulesPath, bowerComponentsPath]
       },
       {
         test: /\.jsx?$/,
         loaders: ['react-hot', 'babel-loader'],
-        exclude: /node_modules|bower_components/
+        exclude: [nodeModulesPath, bowerComponentsPath]
       }
     ]
   }

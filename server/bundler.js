@@ -23,7 +23,7 @@ module.exports = function() {
   });
 
   var bundler = new WebpackDevServer(compiler, {
-    publicPath: '/bundle/',
+    publicPath: '/build/',
 
     hot: true,
 

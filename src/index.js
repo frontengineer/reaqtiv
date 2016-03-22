@@ -2,18 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, browserHistory, match, RouterContext } from 'react-router';
 import RouterContainer from './service/RouterContainer';
-import routeOptions from './routes/routes';
+import routes from './routes/routes';
 import objectAssign from 'object-assign';
 
 import Model from './store/MainModel';
-let rO = routeOptions;
-let routes = rO.getRoutes();
 require('./css/styles.less');
 
 RouterContainer.set(Router);
 Model.MainModel$.subscribe(appState => {
-  rO.setAppState(appState);
-
   console.log('Index.js: the appState', appState);
 
   function createElement(Component, props) {

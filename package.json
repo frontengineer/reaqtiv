@@ -3,11 +3,10 @@
   "version": "1.0.0",
   "description": "App",
   "scripts": {
-    "build": "npm run clean && ./node_modules/.bin/babel src -d lib --experimental --optional es7.decorators --ignore '__tests__' && webpack -p --config webpack.config.production",
-    "clean": "rm -rf lib",
-    "dev": "npm run clean && npm run dev-server",
-    "dev-server": "NODE_ENV=development node  --harmony hotWebpack",
-    "start": "babel-node server"
+    "build": "NODE_ENV=production webpack -p --config webpack.config.production.js",
+    "start": "node server",
+    "postinstall": "node deploy",
+    "dev": "babel-node server"
   },
   "author": "David Parnell",
   "dependencies": {
@@ -42,7 +41,7 @@
     "react-star-rating": "git+https://github.com/blackjk3/react-star-rating.git",
     "react-textarea-autosize": "^2.3.1",
     "recat-bootstrap-native-slider": "git+https://github.com/blackjk3/react.bootstrap.slidertest.git",
-    "serve-favicon": "~2.0.1",
+    "serve-favicon": "^2.0.1",
     "serve-static": "~1.9.2",
     "when": "^3.7.7"
   },

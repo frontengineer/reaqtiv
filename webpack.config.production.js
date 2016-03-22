@@ -1,11 +1,16 @@
 var webpack = require('webpack');
+var path = require('path');
+
+var nodeModulesPath = path.resolve(__dirname, 'node_modules');
+var buildPath = path.resolve(__dirname, 'public', 'build');
+var mainPath = path.resolve(__dirname, 'src', 'index.js');
+
 
 module.exports = {
-  entry: [
-    './src/index'
-  ],
+  devtool: 'source-map',
+  entry: mainPath,
   output : {
-    path      : __dirname + '/lib/dist/bundle/',
+    path      : buildPath,
     filename  : 'bundle.js'
   },
   plugins : [
@@ -42,7 +47,7 @@ module.exports = {
       {test: /\.svg$/,  loader: "url?limit=10000&mimetype=image/svg+xml" },
       {
         test: /\.js?$/,
-        loaders: ['jsx-loader?harmony', 'babel?optional[]=runtime&stage=1'],
+        loaders: ['jsx-loader?harmony', 'babel-loader'],
         exclude: /node_modules/
       },
       {
