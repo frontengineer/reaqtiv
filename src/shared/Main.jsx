@@ -9,10 +9,10 @@ const Main = React.createClass({
   //   this.forceUpdate();
   // },
 
-  // componentDidMount: function () {
-  //   console.log('Main: this', this);
-  //   console.log('Main: props', this.props);
-  // },
+  componentDidMount: function () {
+    console.log('Main: this', this);
+    // console.log('Main: props', this.props);
+  },
   render: function() {
     // console.log('Main: props render', this.props);
   const props = this.props;

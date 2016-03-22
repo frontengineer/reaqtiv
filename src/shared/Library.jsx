@@ -2,7 +2,6 @@ import React from 'react';
 import Rx from 'Rx';
 import Input from '../form_builder/Input';
 import SpecMaker from './SpecMaker';
-import ProtectedComponent from '../service/ProtectedComponent';
 
 var aggregator = function (spec, data) {
 
@@ -131,4 +130,4 @@ const Library = React.createClass({
 
 
 
-module.exports = ProtectedComponent(Library);
+module.exports = Library;

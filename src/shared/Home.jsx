@@ -11,4 +11,4 @@ const Home = {
   }
 }
 
-module.exports = ProtectedComponent(React.createClass(Home));
+module.exports = React.createClass(Home);

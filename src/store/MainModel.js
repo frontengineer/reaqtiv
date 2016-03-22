@@ -7,9 +7,10 @@ import jwt_decode from 'jwt-decode';
 
 
 let stateTree = {
-  user        : null,
-  jwt         : null,
-  isLoggedIn  : AuthService.isLoggedIn()
+  stuff : 'blah blah blah'
+  // user        : null,
+  // jwt         : null,
+  // isLoggedIn  : AuthService.isLoggedIn()
 };
 const MainStream = new Rx.BehaviorSubject(stateTree);
 
@@ -19,7 +20,7 @@ class MainModel {
   }
 
   // Just getters for the properties it got from the action.
-  get stream() {
+  getStream() {
     return this.MainModel$;
   }
 }
@@ -27,14 +28,22 @@ class MainModel {
 LoginIntentStream.subscribe(action => {
   switch (action.intent) {
     case 'LOGIN_USER':
-    console.log('MainModel:LoginIntentStream first', action);
-    let newTree =  {
-      jwt         : action.payload,
-      user        : jwt_decode(action.payload),
-      isLoggedIn  : AuthService.isLoggedIn()
-    };
-    stateTree = objectAssign({}, stateTree, newTree)
-    MainStream.onNext(stateTree);
+      console.log('MainModel:LoginIntentStream login', action);
+      // stateTree = objectAssign({}, stateTree, {
+      //   jwt         : action.payload,
+      //   user        : jwt_decode(action.payload),
+      //   isLoggedIn  : AuthService.isLoggedIn()
+      // })
+      MainStream.onNext(stateTree);
+      break;
+    case 'LOGOUT_USER':
+      console.log('MainModel:LoginIntentStream logout', action);
+      // stateTree = objectAssign({}, stateTree, {
+      //   jwt         : null,
+      //   user        : null,
+      //   isLoggedIn  : AuthService.isLoggedIn()
+      // })
+      MainStream.onNext(stateTree);
       break;
     default:
 

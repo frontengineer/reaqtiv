@@ -3,11 +3,11 @@ import AuthService from '../service/AuthService';
 import RouterContainer from '../service/RouterContainer';
 
 
-export default (ComponentToBeRendered) => {
+module.exports = (ComponentToBeRendered) => {
   class ProtectedComponent extends React.Component {
     constructor(props) {
       super(props);
-console.log('ProtectedComponent:constructor', props);
+      console.log('ProtectedComponent:constructor', props);
       // console.log('thiso', AuthService.isLoggedIn());
       this.state = {
         currentUser : this._getLoginState(props)
@@ -18,18 +18,28 @@ console.log('ProtectedComponent:constructor', props);
 
     _getLoginState(props) {
        return {
-         userLoggedIn: !!this.props.isLoggedIn,
-         user: this.props.user,
-         jwt: this.props.jwt
+         userLoggedIn: AuthService.isLoggedIn()
+        //  user: this.props.user,
+        //  jwt: this.props.jwt
        };
      }
 
     componentDidMount(){
       console.log('ProtectedComponent:componentDidMount', this.props, this.state);
-        RouterContainer.set(this.context.router);
+      if(AuthService.isLoggedIn()) { return}
+      RouterContainer.set(this.context.router);
+      AuthService.setTransitionPath(this.props.location.pathname);
+      console.log('AuthService:getTransitionPath', AuthService.getTransitionPath());
       let jwt = localStorage.getItem('jwt');
+      let unauthorized = !AuthService.isLoggedIn() && !jwt;
       // automatically authenticates the user if a JWT is found
-      if (jwt) AuthService.autoLoginUser(jwt, this.props.location.pathname);
+      if (jwt) AuthService.autoLoginUser(jwt);
+
+      // redirect to login page is theres no current user state or any JWT
+      if (unauthorized) {
+        RouterContainer.get().push('login');
+      }
+
     }
 
     _onChange(){
@@ -48,7 +58,7 @@ console.log('ProtectedComponent:constructor', props);
     render(){
       let s = this.state;
 
-      if(this.props.user && this.props.jwt){
+      if(AuthService.isLoggedIn()){
         return <ComponentToBeRendered {...this.props} />
       }else {
         console.log('cannot access that component');

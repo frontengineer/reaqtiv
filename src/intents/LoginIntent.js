@@ -15,7 +15,8 @@ AuthService.getStream().subscribe(action => {
       RouterContainer.get().push((action.payload.pathname || 'home'))
       break;
     case 'LOGOUT_USER':
-      localStorage.removeItem('jwt');
+      localStorage.removeItem(action.payload);
+      LoginIntentStream.onNext({ intent: action.intent, payload: {user: null, jwt: null } });
     default:
 
   }

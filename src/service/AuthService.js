@@ -33,6 +33,7 @@ class AuthService {
     this._stream = AuthServiceStream;
     this.pathname = null;
     this.user = null;
+    this.attempt = null;
 
     this.authDataCallback = this.authDataCallback.bind(this);
     auth.onAuth(this.authDataCallback);
@@ -51,14 +52,16 @@ class AuthService {
     }
   }
 
-  autoLoginUser(token, pathname){
+  autoLoginUser(token){
+    console.log('AuthService:autoLoginUser attempting login', token);
     let savedJWT = localStorage.getItem('jwt');
-
+    let self = this;
       return when.promise((resolve, reject) => {
         auth.authWithCustomToken(token, function(error, authData) {
           if (error) {
             reject(error);
           } else {
+            self.attempt = null;
             resolve(authData);
           }
         });
@@ -70,6 +73,7 @@ class AuthService {
   }
 
   login(username, password) {
+    let self = this;
     return when.promise((resolve, reject) => {
       auth.authWithPassword({
         email    : username,
@@ -78,6 +82,7 @@ class AuthService {
         if (err) {
           reject(err);
         } else {
+          self.attempt = null;
           resolve(authData);
         }
       });
@@ -98,20 +103,28 @@ class AuthService {
   }
 
   getUser(){
-    return this._user;
+    return this.user;
   }
 
   isLoggedIn(){
-    return !!auth.provider
+    // return when.promise((resolve, reject) => {
+    if(this.attempt) {
+
+      setTimeout(this.isLoggedIn, 1000);
+    } else {
+      return this.user && !!this.user.provider
+
+    }
+    // });
   }
 
   logout(){
     auth.unauth();
   }
 
-  pushStream(data){
-    return this._stream.onNext(data);
-  }
+  // pushStream(data){
+  //   return this._stream.onNext(data);
+  // }
 
   signup(signUpData){
     console.log('AuthService:signup attempt user creation', signUpData);
