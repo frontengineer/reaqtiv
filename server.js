@@ -24,7 +24,7 @@ app.enable('view cache');
 
 
 app.use(express.static(publicPath));
-app.use(favicon(__dirname + './public/favicon/favicon.ico'));
+app.use(favicon(__dirname + '/public/favicon/favicon.ico'));
 
 if(!isProduction) {
   var bundle = require('./server/bundler.js');
