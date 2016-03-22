@@ -1,5 +1,5 @@
 import React from 'react';
-import Rx from 'Rx';
+import Rx from 'rx-lite';
 import Input from '../form_builder/Input';
 import SpecMaker from './SpecMaker';
 

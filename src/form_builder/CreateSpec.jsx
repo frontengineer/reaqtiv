@@ -1,5 +1,5 @@
 import React from 'react';
-import Rx from 'Rx';
+import Rx from 'rx-lite';
 import FormFieldButtons from './FormFieldButtons';
 import {elementList} from './FormFieldData';
 import FormDraft from './FormDraft';

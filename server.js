@@ -24,13 +24,14 @@ app.enable('view cache');
 
 
 app.use(express.static(publicPath));
-app.use(favicon(__dirname + '/public/favicon/favicon.ico'));
+// app.use(favicon(__dirname + '/favicon.ico'));
 
 if(!isProduction) {
   var bundle = require('./server/bundler.js');
   bundle();
 
   app.all('/build/*', function(req, res) {
+    console.log('hot loading', req.url);
     proxy.web(req, res, { target: 'http://localhost:8000/'});
   });
 
@@ -70,8 +71,8 @@ var redirect = express();
 // });
 
 
-// app.use(vhost('*.reaqtiv.com', redirect)); // Serves all subdomains via Redirect app
-// app.use(vhost('reaqtiv.com', app)); // Serves top level domain via Main server app
+app.use(vhost('*.reaqtiv.com', redirect)); // Serves all subdomains via Redirect app
+app.use(vhost('reaqtiv.com', app)); // Serves top level domain via Main server app
 
 // It is important to catch any errors from the proxy or the
 // server will crash. An example of this is connecting to the

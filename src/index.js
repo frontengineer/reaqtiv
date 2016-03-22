@@ -6,7 +6,7 @@ import routes from './routes/routes';
 import objectAssign from 'object-assign';
 
 import Model from './store/MainModel';
-require('./css/styles.less');
+require('./css/main.css');
 
 RouterContainer.set(Router);
 Model.MainModel$.subscribe(appState => {

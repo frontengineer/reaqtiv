@@ -1,6 +1,6 @@
 var webpack = require('webpack');
 var path = require('path');
-
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var nodeModulesPath = path.resolve(__dirname, 'node_modules');
 var buildPath = path.resolve(__dirname, 'public', 'build');
 var mainPath = path.resolve(__dirname, 'src', 'index.js');
@@ -13,29 +13,51 @@ module.exports = {
     path      : buildPath,
     filename  : 'bundle.js'
   },
-  plugins : [
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        // Because uglify reports so many irrelevant warnings.
-        warnings: false
-      },
-      minimize: true
-    })
+  // plugins : [
+  //   new webpack.optimize.UglifyJsPlugin({
+  //     compress: {
+  //       // Because uglify reports so many irrelevant warnings.
+  //       warnings: false
+  //     },
+  //     minimize: true
+  //   }),
+  //   // Write out CSS bundle to its own file:
+	// 	new ExtractTextPlugin('style.css', { allChunks: true })
+  //
+  // ],
 
-  ],
+  plugins: ([
+    // Avoid publishing files when compilation failed:
+    new webpack.NoErrorsPlugin(),
+
+    // Aggressively remove duplicate modules:
+    new webpack.optimize.DedupePlugin(),
+
+    // Write out CSS bundle to its own file:
+    new ExtractTextPlugin('style.css', { allChunks: true })
+  ]).concat(process.env.WEBPACK_ENV==='dev' ? [] : [
+    new webpack.optimize.OccurenceOrderPlugin(),
+
+    // minify the JS bundle
+    new webpack.optimize.UglifyJsPlugin({
+      output: { comments: false },
+      compress: { warnings : false },
+      minimize: true,
+      exclude: [ /\.min\.js$/gi ]		// skip pre-minified libs
+    })
+  ]),
+
   resolve: {
     extensions : ['', '.js', '.jsx', '.css', '.less']
   },
   module: {
     loaders : [
       {
-        test: /\.less$/,
-        loader: "style!css!less"
+        test: /\.(less|css)$/,
+        loader : 'style-loader!css-loader!less'
+        // loader: ExtractTextPlugin.extract("style?sourceMap", "css?sourceMap!autoprefixer?browsers=last 2 version!less")
       },
-      {
-        test: /\.css$/, // Only .css files
-        loader: 'style!css' // Run both loaders
-      },
+
       {
         test: /\.jpg$/,
         loader: 'url?limit=25000'
