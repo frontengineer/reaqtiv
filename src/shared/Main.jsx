@@ -21,8 +21,6 @@ const Main = React.createClass({
         <div className="row">
         <Link to="/">Home</Link>
           &nbsp;&nbsp;&nbsp;
-        <Link to="home">Demo</Link>
-          &nbsp;&nbsp;&nbsp;
         <Link to="library">Library</Link>
           &nbsp;&nbsp;&nbsp;
         <Link to="createspec">Create</Link>

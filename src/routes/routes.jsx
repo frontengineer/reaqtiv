@@ -1,5 +1,4 @@
-import { Router } from 'react-router';
-import { Route } from 'react-router';
+import { Router, Route, IndexRoute } from 'react-router';
 import AuthService from '../service/AuthService';
 import MainStream from '../store/MainModel';
 
@@ -15,7 +14,7 @@ let CreateSpec = require('../form_builder/CreateSpec');
 
 const routes = (
   <Route path="/" component={Main} >
-    <Route path="home" component={ProtectedComponent(Home)} />
+    <IndexRoute component={Home}/>
     <Route path="login" component={Login} />
     <Route path="signup" component={SignUp} />
     <Route path="logout" component={Logout} />
