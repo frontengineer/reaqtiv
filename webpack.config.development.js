@@ -1,5 +1,7 @@
 var webpack = require('webpack');
 var path = require('path');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
+
 var nodeModulesPath = path.resolve(__dirname, 'node_modules');
 var bowerComponentsPath = path.resolve(__dirname, 'bower_components');
 var buildPath = path.resolve(__dirname, 'public', 'build');
@@ -19,10 +21,20 @@ module.exports = {
     filename  : 'bundle.js',
     publicPath: '/build/'
   },
-  plugins : [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
-  ],
+  plugins: ([
+      new webpack.HotModuleReplacementPlugin(),
+      new webpack.NoErrorsPlugin(),
+
+    // Write out CSS bundle to its own file:
+    new ExtractTextPlugin('style.css', { allChunks: true })
+  ]).concat(process.env.WEBPACK_ENV==='dev' ? [] : [
+    new webpack.optimize.OccurenceOrderPlugin(),
+  ]),
+
+  // plugins : [
+  //   new webpack.HotModuleReplacementPlugin(),
+  //   new webpack.NoErrorsPlugin()
+  // ],
   resolve: {
     alias: {
       'react': path.join(__dirname, 'node_modules', 'react')
@@ -32,8 +44,9 @@ module.exports = {
   module: {
     loaders : [
       {
-        test: /\.less$/,
-        loader: "style-loader!css-loader!less-loader"
+        test: /\.(less|css)$/,
+        loader : 'style-loader!css-loader!less'
+        // loader: ExtractTextPlugin.extract("style?sourceMap", "css?sourceMap!autoprefixer?browsers=last 2 version!less")
       },
       {
         test: /\.jpg$/,

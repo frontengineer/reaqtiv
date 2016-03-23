@@ -95,8 +95,5 @@
     "redux-devtools": "^2.0.0",
     "root": "^3.0.0",
     "webpack-dev-server": "^1.10.1"
-  },
-  "engines": {
-    "node": "0.12.x"
   }
 }
