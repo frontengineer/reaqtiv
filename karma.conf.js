@@ -1,26 +1,85 @@
 var webpack = require('webpack');
+var path = require('path');
+// var IgnorePlugin = require('webpack').IgnorePlugin;
 
 module.exports = function(config){
   config.set({
-    browsers: ['Chrome'],
-    singleRun: true,
+    basePath: './',
+    browsers: ['PhantomJS'],
+    singleRun: false,
     frameworks: ['mocha'],
     files: [
-    'tests.webpack.js',
+      'node_modules/phantomjs-polyfill/bind-polyfill.js',
+      'node_modules/karma-babel-preprocessor/node_modules/babel-polyfill/dist/polyfill.js',
+      'tests.webpack.js'
+      // // 'node_modules/react/dist/react.min.js',
+      // // 'node_modules/rx-lite/rx.lite.min.js',
+      // 'src/**/**/*-test.js'
+    ],
+    plugins: [
+      'karma-mocha',
+      'karma-webpack',
+      'karma-sourcemap-loader',
+      'karma-mocha-reporter',
+      'karma-phantomjs-launcher',
+      'karma-coverage',
+      'karma-spec-reporter'
     ],
     preprocessors: {
+      // 'node_modules/react/react.js': ['babel'],
       'tests.webpack.js' : ['webpack', 'sourcemap']
     },
-    reporters : ['dots'],
+    babelPreprocessor: {
+      options: {
+        sourceMap: 'inline'
+      },
+      filename: function (file) {
+        return file.originalPath.replace(/\.js$/, '.es5.js');
+      },
+      sourceFileName: function (file) {
+        return file.originalPath;
+      }
+    },
+
+    resolve: {
+      extensions : ['', '.js', '.jsx']
+    },
+
+    reporters: [ 'mocha', 'coverage' ],
+    coverageReporter: {
+      reporters: [
+        { type: 'html', dir: 'coverage/', subdir: '.' },
+        // { type: 'lcov', dir: 'coverage/', subdir: '.' },
+        { type: 'text-summary' }
+      ]
+    },
     webpack : {
-      // devtool: 'inline-source-map', //just do inline source maps instead of the default
+      noInfo: true,
+      devtool: 'inline-source-map', //just do inline source maps instead of the default
+      plugins: [
+        new webpack.IgnorePlugin(/ReactContext/),
+      ],
+
       module: {
-        loaders : [
-          { test: /\.js?$/, exclude: '/node_modules/', loader: 'babel-loader' }
-        ]
+        loaders : [{
+          test: /\.(js|jsx)$/, exclude: /(bower_components|node_modules)/,
+          loader: 'babel-loader'
+        }],
+        postLoaders: [{
+          test: /\.(js|jsx)$/, exclude: /(node_modules|bower_components|tests)/,
+          loader: 'istanbul-instrumenter'
+        }]
       },
       watch: true
     },
+    webpackMiddleware: {
+     noInfo: true,
+     stats: {
+         color: true,
+         chunkModules: false,
+         modules: false
+     }
+   },
     webPackServer : {
       noInfo: true
     }
