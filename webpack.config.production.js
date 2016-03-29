@@ -7,26 +7,18 @@ var mainPath = path.resolve(__dirname, 'src', 'index.js');
 
 
 module.exports = {
-  devtool: 'source-map',
+  devtool: 'inline-source-map',
   entry: mainPath,
   output : {
     path      : buildPath,
-    filename  : 'bundle.js'
+    filename  : 'bundle.js',
+    chunkFilename: '[id].chunk.js',
+    publicPath : '/build/'
   },
-  // plugins : [
-  //   new webpack.optimize.UglifyJsPlugin({
-  //     compress: {
-  //       // Because uglify reports so many irrelevant warnings.
-  //       warnings: false
-  //     },
-  //     minimize: true
-  //   }),
-  //   // Write out CSS bundle to its own file:
-	// 	new ExtractTextPlugin('style.css', { allChunks: true })
-  //
-  // ],
 
   plugins: ([
+    new webpack.optimize.CommonsChunkPlugin('common.js'),
+
     // Avoid publishing files when compilation failed:
     new webpack.NoErrorsPlugin(),
 
