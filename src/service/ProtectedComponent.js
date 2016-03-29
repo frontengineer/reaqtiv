@@ -7,7 +7,7 @@ module.exports = (ComponentToBeRendered) => {
   class ProtectedComponent extends React.Component {
     constructor(props) {
       super(props);
-      console.log('ProtectedComponent:constructor', props);
+      // console.log('ProtectedComponent:constructor', props);
       // console.log('thiso', AuthService.isLoggedIn());
       this.state = {
         currentUser : this._getLoginState(props)
@@ -25,11 +25,9 @@ module.exports = (ComponentToBeRendered) => {
      }
 
     componentDidMount(){
-      console.log('ProtectedComponent:componentDidMount', this.props, this.state);
       if(AuthService.isLoggedIn()) { return}
       RouterContainer.set(this.context.router);
       AuthService.setTransitionPath(this.props.location.pathname);
-      console.log('AuthService:getTransitionPath', AuthService.getTransitionPath());
       let jwt = localStorage.getItem('jwt');
       let unauthorized = !AuthService.isLoggedIn() && !jwt;
       // automatically authenticates the user if a JWT is found

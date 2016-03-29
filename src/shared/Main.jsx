@@ -4,18 +4,12 @@ import RouterContainer from '../service/RouterContainer';
 import AuthService from '../service/AuthService';
 
 const Main = React.createClass({
-  // componentWillReceiveProps: function(nextProps, nextState){
-  //   console.log('Main:componentWillReceiveProps', nextProps, nextState);
-  //   this.forceUpdate();
-  // },
 
   componentDidMount: function () {
     console.log('Main: this', this);
     // console.log('Main: props', this.props);
   },
   render: function() {
-    // console.log('Main: props render', this.props);
-  const props = this.props;
     return (
       <div className="container">
         <div className="row">
