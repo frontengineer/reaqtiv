@@ -11,19 +11,6 @@ import RouterContainer from '../service/RouterContainer';
 
 
 const auth = new Firebase("https://glaring-inferno-1396.firebaseio.com/");
-// Create a callback which logs the current auth state
-// function authDataCallback(authData) {
-//   if (authData) {
-//     this.user = authData;
-//     console.log("User " + authData.uid + " is logged in with " + authData.provider);
-//   } else {
-//     this.user = null;
-//     console.log("User is logged out");
-//   }
-//   return authData;
-// }
-
-// Register the callback to be fired every time auth state changes
 
 export const AuthServiceStream = new Rx.Subject();
 
@@ -69,6 +56,59 @@ class AuthService {
   }
 
   createProfile(){
+    auth.child('users').child(signUpData.username).transaction(function(currentValue) {
+      console.log('AuthService:currentValue', currentValue);
+
+      if(currentValue === null){
+        return signUpData;
+      } else {
+        reject('Already Exist');
+      }
+    }, function(err, completed, snap) {
+      if(err) {
+        console.log('Failed to create', err);
+        reject(err);
+      } else if(completed){
+        console.log('Good to go', completed);
+        resolve(completed);
+      }
+
+      console.log('AuthService:signup snapshot', snap.val());
+    })
+
+  }
+
+  checkForDomain(domain){
+    // console.log('AuthService:checkForDomain', domain);
+    return when.promise((resolve, reject) => {
+      auth.child('domains').child(domain).once('value', snapshot => {
+        console.log('AuthService:checkForDomain - snapshot', snapshot.val());
+        if(snapshot.val()) {
+          resolve(true);
+        } else {
+          reject(false);
+        }
+      })
+    }).catch( x => false);
+    //
+    // return when.promise((resolve, reject) => {
+    //   auth.child('domains').child(domain).transaction(function(currentValue) {
+    //     if(currentValue === null){
+    //       // return domain;
+    //     } else {
+    //       return 'blah';
+    //       reject({ rsp: 'error', payload: 'Choose another name'});
+    //     }
+    //   }, function(err, completed, snap) {
+    //     if(err) {
+    //       reject({ rsp: 'error', payload: err});
+    //     } else if(completed){
+    //       resolve({ rsp: 'success', payload: completed});
+    //     }
+    //
+    //     // console.log('AuthService:checkForDomain:snapshot', snap.val());
+    //   });
+    // }).catch(x => 'Please try again');
 
   }
 
