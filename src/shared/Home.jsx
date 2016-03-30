@@ -1,5 +1,4 @@
 import React from 'react';
-import ProtectedComponent from '../service/ProtectedComponent';
 
 export default class Home extends React.Component {
   render() {
