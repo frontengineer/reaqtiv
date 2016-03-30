@@ -1,8 +1,5 @@
 import React from 'react';
 import expect from 'expect';
-import when from 'when';
-import sd from 'skin-deep';
-import {resolve} from 'path';
 let AuthService = require('../AuthService');
 
 describe('AuthService user management', function () {
