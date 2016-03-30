@@ -15,15 +15,16 @@ const auth = new Firebase("https://glaring-inferno-1396.firebaseio.com/");
 export const AuthServiceStream = new Rx.Subject();
 
 class AuthService {
-  constructor(){
+  constructor(props){
     const self = this;
+    this.auth = props.auth;
     this._stream = AuthServiceStream;
     this.pathname = null;
     this.user = null;
     this.attempt = null;
 
     this.authDataCallback = this.authDataCallback.bind(this);
-    auth.onAuth(this.authDataCallback);
+    this.auth.onAuth(this.authDataCallback);
   }
 
   authDataCallback(authData) {
@@ -113,6 +114,7 @@ class AuthService {
   }
 
   login(username, password) {
+    console.log('AuthService got login:', username, password);
     let self = this;
     return when.promise((resolve, reject) => {
       auth.authWithPassword({
@@ -192,5 +194,6 @@ class AuthService {
   }
 
 }
-
-export default new AuthService();
+const Service = new AuthService({ auth : auth });
+export default Service;
+module.exports = Service;
