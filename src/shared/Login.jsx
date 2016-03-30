@@ -10,7 +10,7 @@ export default class Login extends React.Component {
   constructor(props){
     super();
     this.state = {
-      user: 'aa@aa.com',
+      email: 'aa@aa.com',
       password: '1234'
     };
 
@@ -29,7 +29,7 @@ export default class Login extends React.Component {
     e.preventDefault();
     console.log('the state', this.state);
 
-    Auth.login(this.state.user, this.state.password).
+    Auth.login(this.state.email, this.state.password).
     catch((err)=>{
       console.log('Error logging in', err);
     })
@@ -40,7 +40,7 @@ export default class Login extends React.Component {
       <div>
         <form role="form">
          <div className="form-group">
-          <div><input type="text" valueLink={this.linkState('user')} placeholder="Enter user name"/></div>
+          <div><input type="text" valueLink={this.linkState('email')} placeholder="Enter user name"/></div>
           <div><input type="password" valueLink={this.linkState('password')} placeholder="Enter password"/></div>
           </div>
           <button type="submit" onClick={this.login.bind(this)}>Submit</button>
