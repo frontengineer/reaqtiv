@@ -1,12 +1,12 @@
 var IgnorePlugin = require('webpack').IgnorePlugin;
 var path = require('path');
 // var IgnorePlugin = require('webpack').IgnorePlugin;
-
+console.log('Karma: test server will run ', (process.env.SINGLE_RUN ? 'once': 'until stopped manually'));
 module.exports = function(config){
   config.set({
     basePath: './',
     browsers: ['PhantomJS'],
-    singleRun: false,
+    singleRun: process.env.SINGLE_RUN || false,
     frameworks: ['mocha'],
     files: [
       'node_modules/phantomjs-polyfill/bind-polyfill.js',
