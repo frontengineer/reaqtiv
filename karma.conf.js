@@ -55,7 +55,7 @@ module.exports = function(config){
     },
     webpack : {
       noInfo: true,
-      devtool: 'inline-source-map', //just do inline source maps instead of the default
+      devtool: 'source-map', //just do inline source maps instead of the default
       plugins: [
         new webpack.IgnorePlugin(/ReactContext/),
       ],
