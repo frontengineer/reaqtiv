@@ -1,4 +1,4 @@
-var webpack = require('webpack');
+var IgnorePlugin = require('webpack').IgnorePlugin;
 var path = require('path');
 // var IgnorePlugin = require('webpack').IgnorePlugin;
 
@@ -10,8 +10,8 @@ module.exports = function(config){
     frameworks: ['mocha'],
     files: [
       'node_modules/phantomjs-polyfill/bind-polyfill.js',
-      'node_modules/karma-babel-preprocessor/node_modules/babel-polyfill/dist/polyfill.js',
-      'tests.webpack.js'
+      // 'node_modules/karma-babel-preprocessor/node_modules/babel-polyfill/dist/polyfill.js',
+      'src/**/**/*.spec.js'
       // // 'node_modules/react/dist/react.min.js',
       // // 'node_modules/rx-lite/rx.lite.min.js',
       // 'src/**/**/*-test.js'
@@ -22,12 +22,11 @@ module.exports = function(config){
       'karma-sourcemap-loader',
       'karma-mocha-reporter',
       'karma-phantomjs-launcher',
-      'karma-coverage',
-      'karma-spec-reporter'
+      'karma-coverage'
     ],
     preprocessors: {
       // 'node_modules/react/react.js': ['babel'],
-      'tests.webpack.js' : ['webpack', 'sourcemap']
+      'src/**/**/*.spec.js' : ['webpack', 'sourcemap']
     },
     babelPreprocessor: {
       options: {
@@ -57,7 +56,7 @@ module.exports = function(config){
       noInfo: true,
       devtool: 'source-map', //just do inline source maps instead of the default
       plugins: [
-        new webpack.IgnorePlugin(/ReactContext/),
+        new IgnorePlugin(/ReactContext/),
       ],
 
       module: {
