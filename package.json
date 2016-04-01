@@ -7,7 +7,8 @@
     "start": "node server",
     "postinstall": "node deploy",
     "dev": "WEBPACK_ENV=dev babel-node server",
-    "test": "karma start"
+    "test": "karma start",
+    "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
   },
   "author": "David Parnell",
   "dependencies": {
@@ -75,6 +76,7 @@
   "devDependencies": {
     "browserify": "^10.2.4",
     "core-js": "^0.9.18",
+    "coveralls": "^2.11.9",
     "expect": "^1.16.0",
     "istanbul-instrumenter-loader": "^0.2.0",
     "jasmine": "^2.3.1",

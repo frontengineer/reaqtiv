@@ -48,7 +48,7 @@ module.exports = function(config){
     coverageReporter: {
       reporters: [
         { type: 'html', dir: 'coverage/', subdir: '.' },
-        { type: 'lcov', subdir: 'report-lcov' },
+        { type: 'lcov', subdir: '.' },
         { type: 'lcovonly', subdir: '.', file: 'report-lcovonly.txt' },
         { type: 'text-summary', subdir: '.', file: 'karma-summary.txt' }
       ]

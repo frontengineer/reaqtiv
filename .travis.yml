@@ -3,3 +3,4 @@ node_js:
   - "4"
 notifications:
   slack: dstartup:GiJkWscjTWLhNLkZaON6wSlO
+after_success: 'npm run coveralls'
