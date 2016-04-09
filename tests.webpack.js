@@ -1,3 +1,5 @@
-var context = require.context('./src', true, /.spec\.js$/); //make sure you have your directory and regex test set correctly!
-context.keys().forEach(context);
-module.exports = context;
+// *Some* environments (phantomjs) don't have es5 (Function.prototype.bind)
+// require('karma-babel-preprocessor/node_modules/babel-polyfill/dist/polyfill');
+
+var testsContext = require.context('./src', true, /\.spec\.js$/);
+testsContext.keys().forEach(testsContext);

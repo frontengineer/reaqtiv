@@ -1,87 +1,84 @@
 var IgnorePlugin = require('webpack').IgnorePlugin;
+var RewireWebpackPlugin = require('rewire-webpack');
 var path = require('path');
 // var IgnorePlugin = require('webpack').IgnorePlugin;
 console.log('Karma: test server will run ', (process.env.SINGLE_RUN ? 'once': 'until stopped manually'));
 module.exports = function(config){
   config.set({
-    basePath: './',
-    browsers: ['PhantomJS'],
-    singleRun: process.env.SINGLE_RUN || false,
-    frameworks: ['mocha'],
     files: [
       'node_modules/phantomjs-polyfill/bind-polyfill.js',
-      // 'node_modules/karma-babel-preprocessor/node_modules/babel-polyfill/dist/polyfill.js',
-      'src/**/**/*.spec.js'
-      // // 'node_modules/react/dist/react.min.js',
-      // // 'node_modules/rx-lite/rx.lite.min.js',
+      // 'src/**/**/*.js',
+      // 'src/**/*.jsx',
+      // 'src/**/*.spec.js'
+      'tests.webpack.js'
       // 'src/**/**/*-test.js'
     ],
-    plugins: [
-      'karma-mocha',
-      'karma-webpack',
-      'karma-sourcemap-loader',
-      'karma-mocha-reporter',
-      'karma-phantomjs-launcher',
-      'karma-coverage'
-    ],
+
     preprocessors: {
       // 'node_modules/react/react.js': ['babel'],
-      'src/**/**/*.spec.js' : ['webpack', 'sourcemap']
+      // 'src/**/*.js' : ['webpack', 'coverage'],
+      // 'src/**/*.jsx' : ['webpack', 'react-jsx', 'coverage'],
+      'tests.webpack.js' : ['webpack', 'sourcemap']
+      // 'src/**/*.spec.js' : [ 'webpack', 'sourcemap']
     },
-    babelPreprocessor: {
-      options: {
-        sourceMap: 'inline'
-      },
-      filename: function (file) {
-        return file.originalPath.replace(/\.js$/, '.es5.js');
-      },
-      sourceFileName: function (file) {
-        return file.originalPath;
-      }
-    },
+    // basePath: './',
+    browsers: ['Chrome'],
+    singleRun: true,
+    // autoWatch: true,
+    frameworks: ['chai', 'mocha'],
+    plugins: [
+      'karma-chrome-launcher',
+      'karma-chai',
+      'karma-coverage',
+      'karma-mocha',
+      'karma-mocha-reporter',
+      'karma-sourcemap-loader',
+      'karma-webpack',
+    ],
 
-    resolve: {
-      extensions : ['', '.js', '.jsx']
-    },
+    reporters: ['mocha', 'coverage' ],
 
-    reporters: [ 'mocha', 'coverage' ],
-    coverageReporter: {
-      reporters: [
-        { type: 'html', dir: 'coverage/', subdir: '.' },
-        { type: 'lcov', subdir: '.' },
-        { type: 'lcovonly', subdir: '.', file: 'report-lcovonly.txt' },
-        { type: 'text-summary', subdir: '.', file: 'karma-summary.txt' }
-      ]
-    },
+     coverageReporter: {
+      //  dir : 'coverage/',
+       reporters: [
+         { type: 'html', subdir: 'html' },
+         { type: 'lcov', subdir: '.', file: 'lcov.info'},
+         { type: 'lcovonly', subdir: '.', file: 'lcov-js.info' },
+        //  { type: 'text-summary' }
+       ]
+     },
+
+    //
+    // resolve: {
+    //   extensions : ['', '.js', '.jsx']
+    // },
+
     webpack : {
-      noInfo: true,
-      devtool: 'source-map', //just do inline source maps instead of the default
+      // noInfo: true,
+      devtool: 'inline-source-map', //just do inline source maps instead of the default
       plugins: [
         new IgnorePlugin(/ReactContext/),
       ],
-
+      node: {
+        fs: "empty"
+      },
       module: {
-        loaders : [{
-          test: /\.(js|jsx)$/, exclude: /(bower_components|node_modules)/,
-          loader: 'babel-loader'
-        }],
+        loaders: [
+         {
+           test: /\.(js|jsx?)$/,
+           exclude: /(bower_components|node_modules)/,
+           loader: 'babel-loader'
+         }
+        ],
         postLoaders: [{
-          test: /\.(js|jsx)$/, exclude: /(node_modules|bower_components|tests)/,
+          test: /\.(js|jsx)$/, exclude: /(node_modules|bower_components|__tests__)/,
           loader: 'istanbul-instrumenter'
         }]
+
       },
-      watch: true
     },
-    webpackMiddleware: {
+    webPackServer: {
      noInfo: true,
-     stats: {
-         color: true,
-         chunkModules: false,
-         modules: false
-     }
-   },
-    webPackServer : {
-      noInfo: true
-    }
-  });
+   }
+ });
 };
