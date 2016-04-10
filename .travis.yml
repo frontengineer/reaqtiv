@@ -1,6 +1,9 @@
 language: node_js
 node_js:
-  - "4"
+- '4'
 notifications:
   slack: dstartup:GiJkWscjTWLhNLkZaON6wSlO
-after_success: 'npm run test_coverage'
+after_success: npm run test_coverage
+env:
+  global:
+    secure: JDR7SKVxqPIk0ezuTX8K5uVLKMNNb9k5xAxVKLjvHNABO0cB2H0XQfW2VQS/zrj8ivwdeBvxP1I8ALXOrYjWCEwMIld8w8Ge5Kmx0XUQemkV8I5lm+893B1yOzhl2JmeftwBk4KFFKICu7YONGtR0Fqbs7I9cDVUX9HK2MZthj/bU4lxJ55Yq1ztYP4uPS0usvGvn3boa5Fz6TdgMiQx38Dmd7aI45JC5JcP2pUhi3MNY0JE0i5yNP6+mOsCOsaIvw9ob0yb2+N6XZ8sBvLn0Uw7eRJW+hrDu6l9CNvOL31zqSMSKWYN+lO6PUhokfeQys4hJoNAuSdpW+acjG4SVLxiR9n79hibOCLQh5DPfWFPBVyCss6lJVwm9bJs9bw5RdYoYkJpjWAKAVV6fvXeEyUD3uCi0hgY7Y0KkoTrylNl0mTpV8TrJwil+ilH4o4IER/vsEiSnwlruJxur3cP/YzfeXBhbQbEBEH21Rsqd0VDaoGBjRAMx7EskJjzfEWHm/UZUEAEPrLzXMsWHbThK9eN4+kiCOeaaCWb8dWEkxgyO0fEXX1Uc+mOd1MmdU/b/J9OoWoX1Sdvn6ic4sDzEwc4Fny806/9umsZJnKYDAPkWJXaixlJrGW56nvezd3TmQvVErrzerzkubYQ22WFBBLiZU/VMtjPc+O9kLE+mV0=

@@ -47,4 +47,3 @@ src/config/config.js
 lib
 /coverage
 .istanbul.yml
-.coveralls.yml

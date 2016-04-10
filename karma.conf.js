@@ -31,10 +31,10 @@ module.exports = function(config){
      coverageReporter: {
       //  dir : 'coverage/',
        reporters: [
-         { type: 'html', subdir: 'html' },
-         { type: 'lcov', subdir: '.', file: 'lcov.info'},
-         { type: 'lcovonly', subdir: '.', file: 'lcov-js.info' },
-        //  { type: 'text-summary' }
+        //  { type: 'html', subdir: 'html' },
+        //  { type: 'lcov', subdir: '.', file: 'lcov.info'},
+        //  { type: 'lcovonly', subdir: '.', file: 'lcov-js.info' },
+         { type: 'text-summary' }
        ]
      },
 

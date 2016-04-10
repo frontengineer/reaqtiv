@@ -8,7 +8,7 @@
     "postinstall": "node deploy",
     "dev": "WEBPACK_ENV=dev babel-node server",
     "test": "karma start",
-    "test_coverage": "./node_modules/babel-istanbul/lib/cli.js cover --dir ./coverage ./node_modules/mocha/bin/_mocha --  --require node_modules/ignore-styles  -R spec ./src/**/*.jsx ./src/**/*.js && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "test_coverage": "./node_modules/babel-istanbul/lib/cli.js cover --dir ./coverage ./node_modules/mocha/bin/_mocha --  --require node_modules/ignore-styles  -R spec ./src/**/*.jsx ./src/**/*.js",
     "test_coverage_old": "./node_modules/babel-istanbul/lib/cli.js cover --dir ./coverage ./node_modules/mocha/bin/_mocha --  --require node_modules/ignore-styles  -R spec ./src/**/* ",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
   },
