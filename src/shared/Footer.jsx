@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Rx from 'Rx';
+import Rx from 'rx-lite';
 import IntentConstants from '../constants/IntentTypes';
 import TodoFilters from './TodoFilters';
 import TodoCount from './TodoCount';

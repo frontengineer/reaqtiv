@@ -1,4 +1,4 @@
-var Rx = require('Rx');
+var Rx = require('rx-lite');
 var Action = require('../constants/IntentTypes');
 var TodoIntents = require('../intents/TodoIntents');
 var assign = require('../utils/assign');
