@@ -8,7 +8,8 @@
     "postinstall": "node deploy",
     "dev": "WEBPACK_ENV=dev babel-node server",
     "test": "karma start",
-    "test_coverage": "./node_modules/babel-istanbul/lib/cli.js cover --dir ./coverage _mocha --  --require node_modules/ignore-styles  -R spec ./src/**/* ",
+    "test_coverage": "./node_modules/babel-istanbul/lib/cli.js cover --dir ./coverage ./node_modules/mocha/bin/_mocha --  --require node_modules/ignore-styles  -R spec ./src/**/*.jsx ./src/**/*.js && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "test_coverage_old": "./node_modules/babel-istanbul/lib/cli.js cover --dir ./coverage ./node_modules/mocha/bin/_mocha --  --require node_modules/ignore-styles  -R spec ./src/**/* ",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
   },
   "author": "David Parnell",
@@ -101,7 +102,6 @@
     "react-tools": "^0.13.3",
     "redux-devtools": "^2.0.0",
     "root": "^3.0.0",
-    "skin-deep": "^0.16.0",
     "webpack-dev-server": "^1.10.1"
   }
 }

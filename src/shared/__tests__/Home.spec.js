@@ -1,6 +1,5 @@
 import React from 'react';
 import expect from 'expect';
-import sd from 'skin-deep';
 import {resolve} from 'path';
 var Home = resolve(__dirname +'../Home');
 

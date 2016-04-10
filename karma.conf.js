@@ -1,5 +1,4 @@
 var IgnorePlugin = require('webpack').IgnorePlugin;
-var RewireWebpackPlugin = require('rewire-webpack');
 var path = require('path');
 // var IgnorePlugin = require('webpack').IgnorePlugin;
 console.log('Karma: test server will run ', (process.env.SINGLE_RUN ? 'once': 'until stopped manually'));
@@ -22,19 +21,10 @@ module.exports = function(config){
       // 'src/**/*.spec.js' : [ 'webpack', 'sourcemap']
     },
     // basePath: './',
-    browsers: ['Chrome'],
+    browsers: ['PhantomJS'],
     singleRun: true,
     // autoWatch: true,
-    frameworks: ['chai', 'mocha'],
-    plugins: [
-      'karma-chrome-launcher',
-      'karma-chai',
-      'karma-coverage',
-      'karma-mocha',
-      'karma-mocha-reporter',
-      'karma-sourcemap-loader',
-      'karma-webpack',
-    ],
+    frameworks: ['mocha'],
 
     reporters: ['mocha', 'coverage' ],
 
