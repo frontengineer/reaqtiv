@@ -3,7 +3,6 @@ if(typeof require.ensure !== "function") require.ensure = function(d, c) { c(req
 
 import { Router, Route, IndexRoute } from 'react-router';
 import AuthService from '../service/AuthService';
-import MainStream from '../store/MainModel';
 
 let ProtectedComponent = require('../shared/ProtectedComponent');
 let React  = require('react');
