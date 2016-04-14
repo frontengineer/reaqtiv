@@ -1,6 +1,6 @@
 
 var expect = require('expect');
-var ID = require('../ID');
+var ID = require('../id');
 
 describe('Main Component', function () {
   console.log('the ID', ID);
