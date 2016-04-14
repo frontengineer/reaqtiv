@@ -41,9 +41,10 @@ export default class CreateSpec extends React.Component {
         <div className="row">
           <button onClick={this.togglePreview.bind(this)}>Preview</button>
           <button onClick={this.save.bind(this)}>Save</button>
-          // <FormFieldButtons buttonList={buttonList} />
-          // <FormDraft mutable={this.state.mutable} fieldList={this.state.fieldList} />
+          <FormFieldButtons buttonList={buttonList} />
+          <FormDraft mutable={this.state.mutable} fieldList={this.state.fieldList} />
         </div>
     )
   }
 }
+module.exports = CreateSpec;

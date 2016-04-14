@@ -10,11 +10,13 @@ AuthService.getStream().subscribe(action => {
   console.log('Auth Stream fired', action);
   switch (action.intent) {
     case 'LOGIN_USER':
+    console.log('AuthService:Login: fired', action);
       if (typeof localStorage !== undefined  && typeof localStorage === 'function') {
         localStorage.setItem('jwt', action.payload.token);
       }
+      let viewPath = (!action.payload.pathname) ? '/' : action.payload.pathname;
       LoginIntentStream.onNext({ intent: action.intent, payload: action.payload.token});
-      RouterContainer.get().push((action.payload.pathname || 'home'))
+      RouterContainer.get().push(viewPath)
       break;
     case 'LOGOUT_USER':
       if (typeof localStorage !== undefined  && typeof localStorage === 'function') {

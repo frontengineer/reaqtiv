@@ -5,7 +5,7 @@ import _ from 'lodash';
 import Sortable from 'react-sortable-items';
 import fieldLibrary from './form-elements.jsx';
 import FieldComponent from './FieldComponent.jsx';
-// import EditForm from './EditForm.jsx';
+import EditForm from './EditForm.jsx';
 import Keys from './FormBuilderIntents';
 
 export const FieldListIntent = new Rx.BehaviorSubject();

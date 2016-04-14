@@ -155,13 +155,13 @@ class AuthService {
 
   isLoggedIn(){
     // return when.promise((resolve, reject) => {
-    if(this.attempt) {
-
-      setTimeout(this.isLoggedIn, 1000);
-    } else {
+    // if(this.attempt) {
+    //
+    //   setTimeout(this.isLoggedIn, 1000);
+    // } else {
       return this.user && !!this.user.provider
 
-    }
+    // }
     // });
   }
 
