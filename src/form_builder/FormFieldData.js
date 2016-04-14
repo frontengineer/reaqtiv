@@ -1,4 +1,4 @@
-import ID from './UUID';
+import ID from './UUID.js';
 import assign from '../utils/assign';
 export const elementList = [
       // {

@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import Rx from 'rx-lite';
 import assign from '../utils/assign';
-import HeaderBar from './header-bar';
+import HeaderBar from './header-bar.jsx';
 import Sortable from 'react-sortable-items';
 import SortableItemMixin from 'react-sortable-items/SortableItemMixin';
-import fieldLibrary from './form-elements';
+import fieldLibrary from './form-elements.jsx';
 import Keys from './FormBuilderIntents';
 
 export const FieldComponetIntentOutput = new Rx.BehaviorSubject();

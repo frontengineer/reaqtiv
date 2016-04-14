@@ -1,8 +1,8 @@
 import React from 'react';
 import Rx from 'rx-lite';
-import FormFieldButtons from './FormFieldButtons';
+import FormFieldButtons from './FormFieldButtons.jsx';
 import {elementList} from './FormFieldData';
-import FormDraft from './FormDraft';
+import FormDraft from './FormDraft.jsx';
 import SpecOutputModel, {getRawData} from '../store/SpecModel';
 
 const buttonList = elementList.map(x => { return { key: x.key, title: x.title, icon: x.icon } });
@@ -41,13 +41,9 @@ export default class CreateSpec extends React.Component {
         <div className="row">
           <button onClick={this.togglePreview.bind(this)}>Preview</button>
           <button onClick={this.save.bind(this)}>Save</button>
-          <FormFieldButtons buttonList={buttonList} />
-          <FormDraft mutable={this.state.mutable} fieldList={this.state.fieldList} />
+          // <FormFieldButtons buttonList={buttonList} />
+          // <FormDraft mutable={this.state.mutable} fieldList={this.state.fieldList} />
         </div>
     )
   }
 }
-
-
-
-module.exports = CreateSpec;

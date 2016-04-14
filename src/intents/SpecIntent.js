@@ -1,9 +1,9 @@
 import Rx from 'rx-lite';
 
 import Keys from '../form_builder/FormBuilderIntents';
-import {Intent as Create_Field} from '../form_builder/FormFieldButtons';
-import {FieldListIntent as FLI} from '../form_builder/FormDraft';
-import {IntentOutput as SpecFormIntent} from '../form_builder/form-elements-edit';
+import {Intent as Create_Field} from '../form_builder/FormFieldButtons.jsx';
+import {FieldListIntent as FLI} from '../form_builder/FormDraft.jsx';
+import {IntentOutput as SpecFormIntent} from '../form_builder/form-elements-edit.jsx';
 
 
 const AggIntent = new Rx.BehaviorSubject();

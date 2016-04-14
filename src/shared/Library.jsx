@@ -1,8 +1,8 @@
 import React from 'react';
 import Rx from 'rx-lite';
-import Input from '../form_builder/Input';
-import SpecMaker from './SpecMaker';
-
+import Input from '../form_builder/Input.jsx';
+// import SpecMaker from './SpecMaker.jsx';
+/*
 var aggregator = function (spec, data) {
 
   var results = data.materials.filter(function (el) {
@@ -90,7 +90,7 @@ var spec3 = {
 // aggregator(chccSpec, prod1);
 aggregator2(prod2, spec2);
 aggregator2(prod2, spec3);
-
+*/
 const Library = React.createClass({
 
   componentDidMount : function () {
@@ -112,7 +112,6 @@ const Library = React.createClass({
               <input type="submit" value="find" />
             </form>
           </div>
-          <SpecMaker />
 
         </div>
 

@@ -1,5 +1,5 @@
 "use strict";
-require("babel/register");
+require("babel-register");
 require('node-jsx').install({ extension: '.js', harmony: true });
 
 var express = require('express');

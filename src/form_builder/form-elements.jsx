@@ -1,5 +1,5 @@
 import React from 'react';
-import HeaderBar from './header-bar';
+import HeaderBar from './header-bar.jsx';
 import StarRating from 'react-star-rating';
 import Select from 'react-select';
 import SignaturePad from 'react-signature-pad';

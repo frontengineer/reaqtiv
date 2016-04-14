@@ -1,11 +1,13 @@
 import React from 'react';
-import Input from '../form_builder/Input';
+import Input from '../form_builder/Input.jsx';
 import assign from '../utils/assign';
 
-const SpecMaker = React.createClass({
 
-  getInitialState : function () {
-    return {
+export default class SpecMaker extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
       boxStyle : {
         display : 'none',
         position: 'fixed',
@@ -19,9 +21,9 @@ const SpecMaker = React.createClass({
 
       tmpSpec : {}
     }
-  },
+  }
 
-  componentWillMount : function () {
+  componentWillMount() {
     let tmp = {}, queryFilter;
     let self = this;
     let source = Input.getIntent().
@@ -36,9 +38,9 @@ const SpecMaker = React.createClass({
       console.log(self.state.tmpSpec[queryFilter]('ewe'));
       console.log('state var', self.state.tmpSpec[queryFilter]);
     });
-  },
+  }
 
-  render : function () {
+  render() {
     return (
       <div>
         <button onClick={this.showModal.bind(this, 'block')}>Create Standard</button>
@@ -49,12 +51,12 @@ const SpecMaker = React.createClass({
         </div>
       </div>
     )
-  },
+  }
 
-  showModal : function (display) {
+  showModal(display) {
     this.setState({ boxStyle : assign({}, this.state.boxStyle, { display: display }) });
   }
-});
+}
 
 
 module.exports = SpecMaker;

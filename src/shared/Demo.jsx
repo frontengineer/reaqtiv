@@ -1,8 +1,8 @@
 import React from 'react';
 import Rx from 'rx-lite';
-import Input from '../form_builder/Input';
+import Input from '../form_builder/Input.jsx';
 
-let assign = require('../utils/assign');
+import assign from '../utils/assign';
 
 /**
 * pump new immutable data list in here for specs to subscribe to

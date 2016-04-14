@@ -3,9 +3,9 @@ import Rx from 'rx-lite';
 import assign from 'object-assign';
 import _ from 'lodash';
 import Sortable from 'react-sortable-items';
-import fieldLibrary from './form-elements';
-import FieldComponent from './FieldComponent';
-import EditForm from './EditForm';
+import fieldLibrary from './form-elements.jsx';
+import FieldComponent from './FieldComponent.jsx';
+// import EditForm from './EditForm.jsx';
 import Keys from './FormBuilderIntents';
 
 export const FieldListIntent = new Rx.BehaviorSubject();

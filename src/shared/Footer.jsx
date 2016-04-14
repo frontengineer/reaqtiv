@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
 import Rx from 'rx-lite';
-import IntentConstants from '../constants/IntentTypes';
-import TodoFilters from './TodoFilters';
-import TodoCount from './TodoCount';
-
+import IntentConstants from '../constants/IntentTypes.jsx';
 let Intent = new Rx.Subject();
 
 const Footer = React.createClass({
@@ -24,7 +21,6 @@ const Footer = React.createClass({
     return (
       <footer className="footer panel">
         <TodoCount count={itemsRemaining.length || 0}/>
-        <TodoFilters filterChannel={this.props.filterChannel} />
         {list.length ? <button className="clear-completed" onClick={this.removeBatch.bind(this, list)}>Remove Completed</button> : null}
       </footer>
     )

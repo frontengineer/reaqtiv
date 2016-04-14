@@ -7,4 +7,4 @@ let RouterContainer = {
   get: () => _router
 };
 
-export default RouterContainer;
+module.exports = RouterContainer;

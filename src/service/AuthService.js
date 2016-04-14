@@ -30,6 +30,7 @@ class AuthService {
   authDataCallback(authData) {
     if (authData) {
       this.user = authData;
+      this.attempt = true;
       AuthServiceStream.onNext({ intent: 'LOGIN_USER', payload: {token: authData.token, pathname: (this.pathname || null)} });
       console.log("The User " + authData.uid + " is logged in with " + authData.provider, authData);
 
@@ -42,7 +43,7 @@ class AuthService {
 
   autoLoginUser(token){
     console.log('AuthService:autoLoginUser attempting login', token);
-    let savedJWT = localStorage.getItem('jwt');
+    // let savedJWT = localStorage.getItem('jwt');
     let self = this;
       return when.promise((resolve, reject) => {
         auth.authWithCustomToken(token, function(error, authData) {
@@ -146,6 +147,10 @@ class AuthService {
 
   getUser(){
     return this.user;
+  }
+
+  getUser2(a){
+    return a;
   }
 
   isLoggedIn(){

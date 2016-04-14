@@ -28,7 +28,7 @@ module.exports = (ComponentToBeRendered) => {
       if(AuthService.isLoggedIn()) { return}
       RouterContainer.set(this.context.router);
       AuthService.setTransitionPath(this.props.location.pathname);
-      let jwt = localStorage.getItem('jwt');
+      let jwt = (typeof localStorage !== undefined  && typeof localStorage === 'function') ? localStorage.getItem('jwt') : null;
       let unauthorized = !AuthService.isLoggedIn() && !jwt;
       // automatically authenticates the user if a JWT is found
       if (jwt) AuthService.autoLoginUser(jwt);

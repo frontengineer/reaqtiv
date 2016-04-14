@@ -1,9 +1,9 @@
 import React from 'react';
 import Rx from 'rx-lite';
-import DynamicOptionList from './dynamic-option-list';
+import DynamicOptionList from './dynamic-option-list.jsx';
 import TextAreaAutosize from 'react-textarea-autosize';
 import assign from '../utils/assign';
-import {FieldComponetIntentOutput} from './FieldComponent';
+import {FieldComponetIntentOutput} from './FieldComponent.jsx';
 import Keys from './FormBuilderIntents';
 
 export const IntentOutput = new Rx.BehaviorSubject([]);

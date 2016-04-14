@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Rx from 'rx-lite';
-import ToolbarItem, {Intent as ToolbarButtonIntent} from './toolbar-item';
+import ToolbarItem, {Intent as ToolbarButtonIntent} from './toolbar-item.jsx';
 import Keys from './FormBuilderIntents';
 import ElementData, {elementList, _defaultItemOptions} from './FormFieldData';
 import assign from '../utils/assign';

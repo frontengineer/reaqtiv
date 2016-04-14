@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Rx from 'rx-lite';
 import assign from '../utils/assign';
 // import {getElementWithOptions} from './FormFieldData';
-import FormElementsEdit, {IntentOutput as EditResults} from './form-elements-edit';
+import FormElementsEdit, {IntentOutput as EditResults} from './form-elements-edit.jsx';
 import Keys from './FormBuilderIntents';
 
 // export const IntentInput = new Rx.BehaviorSubject();
