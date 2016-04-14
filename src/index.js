@@ -20,7 +20,6 @@ Model.MainModel$.subscribe(appState => {
   }
   let history = browserHistory;
   match({ history, routes }, (error, redirectLocation, renderProps) => {
-    console.log('Index:the browserHistory', browserHistory, routes, renderProps);
-    ReactDOM.render(<Router createElement={createElement} history={history} routes={routes} />, document.getElementById('app'));
+    ReactDOM.render(<Router  history={history} routes={routes} />, document.getElementById('app'));
   });
 });
