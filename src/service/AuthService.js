@@ -8,6 +8,7 @@ import when from 'when';
 import objectAssign from 'object-assign';
 // import jwt_decode from 'jwt-decode';
 import RouterContainer from '../service/RouterContainer';
+import ErrorMsg from '../service/ErrorMsg';
 
 
 const auth = new Firebase("https://glaring-inferno-1396.firebaseio.com/");
@@ -32,18 +33,16 @@ class AuthService {
       this.user = authData;
       this.attempt = true;
       AuthServiceStream.onNext({ intent: 'LOGIN_USER', payload: {token: authData.token, pathname: (this.pathname || null)} });
-      console.log("The User " + authData.uid + " is logged in with " + authData.provider, authData);
+      // console.log("The User " + authData.uid + " is logged in with " + authData.provider, authData);
 
     } else {
       this.user = null;
       AuthServiceStream.onNext({ intent: 'LOGOUT_USER', payload: 'jwt'})
-      console.log("User is logged out");
+      // console.log("User is logged out");
     }
   }
 
   autoLoginUser(token){
-    console.log('AuthService:autoLoginUser attempting login', token);
-    // let savedJWT = localStorage.getItem('jwt');
     let self = this;
       return when.promise((resolve, reject) => {
         auth.authWithCustomToken(token, function(error, authData) {
@@ -59,8 +58,6 @@ class AuthService {
 
   createProfile(){
     auth.child('users').child(signUpData.username).transaction(function(currentValue) {
-      console.log('AuthService:currentValue', currentValue);
-
       if(currentValue === null){
         return signUpData;
       } else {
@@ -68,23 +65,17 @@ class AuthService {
       }
     }, function(err, completed, snap) {
       if(err) {
-        console.log('Failed to create', err);
         reject(err);
       } else if(completed){
-        console.log('Good to go', completed);
         resolve(completed);
       }
-
-      console.log('AuthService:signup snapshot', snap.val());
     })
-
   }
 
   checkForDomain(domain){
-    // console.log('AuthService:checkForDomain', domain);
     return when.promise((resolve, reject) => {
       auth.child('domains').child(domain).once('value', snapshot => {
-        console.log('AuthService:checkForDomain - snapshot', snapshot.val());
+        // console.log('AuthService:checkForDomain - snapshot', snapshot.val());
         if(snapshot.val()) {
           resolve(true);
         } else {
@@ -92,44 +83,23 @@ class AuthService {
         }
       })
     }).catch( x => false);
-    //
-    // return when.promise((resolve, reject) => {
-    //   auth.child('domains').child(domain).transaction(function(currentValue) {
-    //     if(currentValue === null){
-    //       // return domain;
-    //     } else {
-    //       return 'blah';
-    //       reject({ rsp: 'error', payload: 'Choose another name'});
-    //     }
-    //   }, function(err, completed, snap) {
-    //     if(err) {
-    //       reject({ rsp: 'error', payload: err});
-    //     } else if(completed){
-    //       resolve({ rsp: 'success', payload: completed});
-    //     }
-    //
-    //     // console.log('AuthService:checkForDomain:snapshot', snap.val());
-    //   });
-    // }).catch(x => 'Please try again');
-
   }
 
-  login(username, password) {
-    console.log('AuthService got login:', username, password);
-    let self = this;
+  login(email, password) {
     return when.promise((resolve, reject) => {
+      if(email === '' || !email){ reject(ErrorMsg.login_fail); }
+      if(password === '' || !password){ reject(ErrorMsg.login_fail); }
+
       auth.authWithPassword({
-        email    : username,
+        email    : email,
         password : password
       }, function (err, authData) {
         if (err) {
-          reject(err);
+          reject(ErrorMsg.login_unknown);
         } else {
-          self.attempt = null;
           resolve(authData);
         }
       });
-
     });
   }
 
@@ -154,31 +124,16 @@ class AuthService {
   }
 
   isLoggedIn(){
-    // return when.promise((resolve, reject) => {
-    // if(this.attempt) {
-    //
-    //   setTimeout(this.isLoggedIn, 1000);
-    // } else {
-      return this.user && !!this.user.provider
-
-    // }
-    // });
+    return this.user && !!this.user.provider
   }
 
   logout(){
     auth.unauth();
   }
 
-  // pushStream(data){
-  //   return this._stream.onNext(data);
-  // }
-
   signup(signUpData){
-    console.log('AuthService:signup attempt user creation', signUpData);
     return when.promise((resolve, reject) => {
       auth.child('users').child(signUpData.username).transaction(function(currentValue) {
-        console.log('AuthService:currentValue', currentValue);
-
         if(currentValue === null){
           return signUpData;
         } else {
@@ -186,14 +141,10 @@ class AuthService {
         }
       }, function(err, completed, snap) {
         if(err) {
-          console.log('Failed to create', err);
           reject(err);
         } else if(completed){
-          console.log('Good to go', completed);
           resolve(completed);
         }
-
-        console.log('AuthService:signup snapshot', snap.val());
       })
     });
   }

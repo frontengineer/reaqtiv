@@ -7,8 +7,6 @@ var Home = resolve('../Home');
 describe('Home Component', function () {
   it('should render the Home Component', () => {
     let el = <Home title="hello" />;
-    console.log('Home Spec');
-    console.log('Home', el);
     const renderer = TestUtils.createRenderer();
     // renderer.render(Home);
     // const output = renderer.getRenderOutput();
