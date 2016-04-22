@@ -52,34 +52,12 @@ module.exports = function(config){
 
     //
     resolve: {
-      // modulesDirectories : ['shared', 'form_builder', 'utils', 'constants'],
       extensions : ['', '.js', '.jsx']
-      // ,
-      // root: [
-      //   path.resolve('./src'),
-      //   path.resolve('./src/form_builder'),
-      //   path.resolve('./src/shared'),
-      //   path.resolve('./src/utils'),
-      //   path.resolve('./src/form_builder/Input.js'),
-      //   path.resolve('./src/constants')
-      // ],
-      // root: [
-      //     path.resolve(__dirname)
-      // ],
-      // root: '/Users/davidparnell/Sites/sandbox/reaqtiv/src',
-      // alias: {
-      //   // src : 'src',
-      //   constants  : path.resolve(__dirname, 'src', 'constants'),
-      //   form_builder  : path.resolve(__dirname, 'src', 'form_builder'),
-      //   shared        : path.resolve(__dirname, 'src', 'shared'),
-      //   store        : path.resolve(__dirname, 'src', 'store'),
-      //   utils        : path.resolve(__dirname, 'src', 'utils'),
-      //   // Input         : 'src/form_builder/Input'
-      // },
     },
 
     webpack : {
       // noInfo: true,
+      cache: false,
       devtool: 'inline-source-map', //just do inline source maps instead of the default
       // plugins: [
       //   new IgnorePlugin(/ReactContext/),
