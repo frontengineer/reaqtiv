@@ -20,7 +20,7 @@ export default class Login extends React.Component {
   //  const { router } = this.context;
   //  this.router = this.context.router;
    RouterContainer.set(this.context.router);
-  //  console.log('Login: componentDidMount', this);
+   console.log('Login: componentDidMount', this);
 
   //  router.setRouteLeaveHook(route, this.routerWillLeave);
   }

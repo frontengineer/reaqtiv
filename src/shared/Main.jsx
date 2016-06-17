@@ -2,14 +2,19 @@ import React from 'react';
 import { Router, Route, Link } from 'react-router';
 import RouterContainer from '../service/RouterContainer';
 import AuthService from '../service/AuthService';
+import Model from '../store/MainModel';
+import objectAssign from 'object-assign';
 
 const Main = React.createClass({
 
   componentDidMount: function () {
+    console.log('React: this', React.cloneElement);
     console.log('Main: this', this);
     // console.log('Main: props', this.props);
   },
   render: function() {
+
+
     return (
       <div className="container">
         <div className="row">

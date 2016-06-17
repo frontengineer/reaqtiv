@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/rxjs/2.2.26/rx.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/rxjs/2.2.26/rx.async.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/rxjs/2.2.26/rx.coincidence.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/rxjs/2.2.26/rx.binding.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/rxjs/2.2.26/rx.time.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/rxjs-dom/2.0.7/rx.dom.js"></script>
+    <script>
+      (function(){
+        /*
+        - Command fired on stream
+        - A Single-HandlerBlah on stream hears that Command
+        - HandlerBlah gathers/applies previous events to AggBlah for curr state...not including Command/Change
+        - AggBlah builds up event or events needed for change...
+        - AggBlah then applies changes to itself
+        - HandlerBlah request the uncommitted events(msgs)
+        - HandlerBlah then request changes to be committed/persisted via ServiceBlah
+        - ServiceBlah first resolves/throw conflicts...then persists
+        - ServiceBlah (maybe HandlerBlah) can then publish Events to stream
+        - Any Denormalizer on stream can hear Event and build its own specialized view (DTO)
+        - Any Denormalizer will persists its DTO...which is then used
+        */
+        var eventData = [{
+          _id: 'loginHandler',
+          username: 'rydordy',
+          token: '345.465'
+        }];
+        var eventLog = new Rx.BehaviorSubject(eventData);
+        var dataTree = new Rx.BehaviorSubject();
+        var cmdLog = new Rx.Subject();
+        // var loginHandler = bus.
+        // // merge(eventLog).
+        // filter(function(cmd) {
+        //   return cmd.actionType === 'LOGIN_USER';
+        // }).
+        // subscribe(function(cmd) {
+        //   console.log('Login Handler', cmd);
+        // });
+        var team = cmdLog
+        .filter(function(x) {
+          return x.actionType === 'TEAM_CREATION_REQUESTED';
+        })
+        // .filter(function(x) {
+        //   return x.payload.teamName === 'larry';
+        // })
+        .map(function(x) {
+          return {teamName: x.payload.teamName, acls: ''}
+        })
+        .scan(function(acc, val) {
+          return [acc].concat(val);
+        })
+        .subscribe(eventLog);
+
+        eventLog.subscribe(function(x) {
+          console.log('Event Log', x);
+        });
+
+        // Rx.Observable.merge(eventLog)
+
+// eventLog.subscribe(function(x) {
+//   console.log('the x', x);
+// })
+
+
+
+setTimeout(function(){
+  cmdLog.onNext({ actionType: 'TEAM_CREATION_REQUESTED', created_at: new Date().getTime(), payload: {email:'aa@aa.com', teamName: 'Bobs'} });
+}, 250);
+setTimeout(function(){
+  cmdLog.onNext({ actionType: 'TEAM_CREATION_REQUESTED', created_at: new Date().getTime(), payload: {email:'bb@bb.com', teamName: 'larry'} });
+}, 350);
+
+setTimeout(function(){
+  cmdLog.onNext({ actionType: 'TEAM_CREATION_REQUESTED', created_at: new Date().getTime(), payload: {email:'bb@bb.com', teamName: 'Joes'} });
+}, 500);
+
+
+
+      })();
+    </script>
+  </body>
+</html>

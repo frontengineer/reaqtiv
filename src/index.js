@@ -8,11 +8,11 @@ import objectAssign from 'object-assign';
 import Model from './store/MainModel';
 require('./css/main.css');
 
-RouterContainer.set(Router);
-Model.MainModel$.subscribe(appState => {
-  console.log('Index.js: the appState', appState);
+// RouterContainer.set(Router);
+// Model.MainModel$.subscribe(appState => {
+//   console.log('Index.js: the appState', appState);
 
-  function createElement(Component, props) {
+  function createElementWithProps(Component, props) {
     // make sure you pass all the props in!
     console.log('Create element has been called.', props);
     let combinedStateTree = objectAssign({}, props, appState)
@@ -20,6 +20,9 @@ Model.MainModel$.subscribe(appState => {
   }
   let history = browserHistory;
   match({ history, routes }, (error, redirectLocation, renderProps) => {
-    ReactDOM.render(<Router  history={history} routes={routes} />, document.getElementById('app'));
+    // renderProps.context.blah = 58;
+    console.log('Index:the browserHistory',renderProps);
+    // let m = React.cloneElement(renderProps, {stuffy: "blah"});
+    ReactDOM.render(<Router {...renderProps}  />, document.getElementById('app'));
   });
-});
+// });
